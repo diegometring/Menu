@@ -2,7 +2,6 @@ package com.example.menu.controller;
 
 import com.example.menu.dto.ClientRequestDTO;
 import com.example.menu.entity.Client;
-import com.example.menu.repository.ClientRepository;
 import com.example.menu.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
