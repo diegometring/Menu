@@ -5,10 +5,7 @@ import com.example.menu.entity.Client;
 import com.example.menu.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/client")
@@ -21,5 +18,10 @@ public class ClientController {
     public ResponseEntity<Client> createClient(@RequestBody ClientRequestDTO data) {
         Client client = clientService.createClient(data);
         return ResponseEntity.ok(client);
+    }
+
+    @GetMapping
+    public ResponseEntity<Client> login(@ResponseBody ClientResponse data) {
+
     }
 }

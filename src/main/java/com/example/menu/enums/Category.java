@@ -5,5 +5,4 @@ public enum Category {
     PIZZAS,
     PORCOES,
     BEBIDAS
-
 }

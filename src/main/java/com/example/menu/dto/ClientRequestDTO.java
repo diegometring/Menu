@@ -1,5 +1,12 @@
 package com.example.menu.dto;
 
-public record ClientRequestDTO(String name, int phoneNumber, String email) {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record ClientRequestDTO(@NotBlank @Size(max = 50) String name,
+                               @Size(max = 20) int phoneNumber,
+                               @NotBlank @Email String email,
+                               @NotBlank @Size(min = 8) String password) {
 
 }
