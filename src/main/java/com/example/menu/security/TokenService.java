@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.ecommerce.api.domain.user.User;
+import com.example.menu.entity.Client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,12 @@ public class TokenService {
     private String secret;
 
 
-    public String generateToken(User user){
+    public String generateToken(Client client){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(user.getLogin())
+                    .withSubject(client.getEmail())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;

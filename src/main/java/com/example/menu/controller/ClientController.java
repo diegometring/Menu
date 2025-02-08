@@ -1,5 +1,6 @@
 package com.example.menu.controller;
 
+import com.example.menu.dto.ClientResponseDTO;
 import com.example.menu.dto.ClientRequestDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.services.ClientService;
@@ -21,7 +22,7 @@ public class ClientController {
     }
 
     @GetMapping
-    public ResponseEntity<Client> login(@ResponseBody ClientResponse data) {
+    public ResponseEntity<ClientResponseDTO> login(@ResponseBody ClientResponseDTO data) {
 
     }
 }
