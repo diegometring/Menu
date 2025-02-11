@@ -1,14 +1,13 @@
-package com.example.menu.services;
+package com.example.menu.services.client;
 
-import com.example.menu.dto.ClientRequestDTO;
+import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.entity.Client;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IClientService {
     Client createClient(ClientRequestDTO data);
     List<Client> getAllClient();
-    void updateClient();
+    void updateClient(Long id, ClientRequestDTO data);
     void deleteClient(Long id);
 }

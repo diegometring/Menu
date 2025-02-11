@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.awt.*;
+
 @Entity
 @Getter
 @Setter
@@ -18,6 +20,7 @@ public class Menu {
 
     private Long id;
     private String name;
+    private String image;
     private String description;
     private int price;
     private boolean available;

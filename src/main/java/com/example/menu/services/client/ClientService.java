@@ -1,12 +1,14 @@
-package com.example.menu.services;
+package com.example.menu.services.client;
 
-import com.example.menu.dto.ClientRequestDTO;
+import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClientService implements IClientService{
 
     @Autowired

@@ -21,7 +21,7 @@ public class Stock {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 
     private Long id;
+    private String nameProduct;
     private int quantity;
-    private LocalDateTime updateDate;
     private double unitPrice;
 }

@@ -1,9 +1,9 @@
 package com.example.menu.controller;
 
-import com.example.menu.dto.ClientResponseDTO;
-import com.example.menu.dto.ClientRequestDTO;
+import com.example.menu.dto.client.ClientResponseDTO;
+import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.entity.Client;
-import com.example.menu.services.ClientService;
+import com.example.menu.services.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class ClientController {
     }
 
     @GetMapping
-    public ResponseEntity<ClientResponseDTO> login(@ResponseBody ClientResponseDTO data) {
+    public ResponseEntity<ClientResponseDTO> login(ClientResponseDTO data) {
 
     }
 }
