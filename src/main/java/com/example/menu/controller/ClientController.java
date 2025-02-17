@@ -21,8 +21,8 @@ public class ClientController {
         return ResponseEntity.ok(client);
     }
 
-    @GetMapping
-    public ResponseEntity<ClientResponseDTO> login(ClientResponseDTO data) {
+    @PostMapping
+    public ResponseEntity<String> login(@RequestBody ClientResponseDTO data) {
 
     }
 }

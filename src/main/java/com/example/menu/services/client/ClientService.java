@@ -1,6 +1,7 @@
 package com.example.menu.services.client;
 
 import com.example.menu.dto.client.ClientRequestDTO;
+import com.example.menu.dto.client.ClientResponseDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class ClientService implements IClientService{
         client.setPhoneNumber(data.phoneNumber());
         client.setEmail(data.email());
         return clientRepository.save(client);
+    }
+
+    @Override
+    public Client login(ClientResponseDTO data) {
+        
     }
 
     @Override
