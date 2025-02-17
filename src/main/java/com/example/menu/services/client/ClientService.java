@@ -24,10 +24,10 @@ public class ClientService implements IClientService{
         return clientRepository.save(client);
     }
 
-    @Override
-    public Client login(ClientResponseDTO data) {
-        
-    }
+    //@Override
+    //public Client login(ClientResponseDTO data) {
+
+    //}
 
     @Override
     public List<Client> getAllClient() {
