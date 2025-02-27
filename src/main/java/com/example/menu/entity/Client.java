@@ -22,6 +22,7 @@ public class Client {
 
     private Long id;
     private String name;
+    private String password;
     private int phoneNumber;
     private String email;
     private LocalDateTime registrationDate;

@@ -1,33 +1,44 @@
 package com.example.menu.services.client;
 
 import com.example.menu.dto.client.ClientRequestDTO;
-import com.example.menu.dto.client.ClientResponseDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClientService implements IClientService{
+public class ClientService implements IClientService {
 
     @Autowired
     private ClientRepository clientRepository;
 
     @Override
     public Client createClient(ClientRequestDTO data) {
-        Client client = new Client();
-        client.setName(data.name());
-        client.setPhoneNumber(data.phoneNumber());
-        client.setEmail(data.email());
-        return clientRepository.save(client);
+        Client clientt = clientRepository.findByEmail(data.email());
+
+        if (clientt == null) {
+            Client cli = new Client();
+            cli.setName(data.name());
+            cli.setPhoneNumber(data.phoneNumber());
+            cli.setEmail(data.email());
+            return clientRepository.save(cli);
+        } else {
+            throw new RuntimeException("email already in use");
+        }
     }
 
-    //@Override
-    //public Client login(ClientResponseDTO data) {
+    @Override
+    public Client login(ClientRequestDTO data) {
+        Client client = clientRepository.findByEmail(data.email());
 
-    //}
+        if (client != null && client.getPassword().equals(data.password())) {
+            return client;
+        }
+        return null;
+    }
 
     @Override
     public List<Client> getAllClient() {

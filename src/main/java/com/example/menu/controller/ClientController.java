@@ -1,6 +1,7 @@
 package com.example.menu.controller;
 
 import com.example.menu.dto.client.ClientResponseDTO;
+import com.example.menu.dto.client.ClientTokenDTO;
 import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.services.client.ClientService;
@@ -15,14 +16,24 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @PostMapping
-    public ResponseEntity<Client> createClient(@RequestBody ClientRequestDTO data) {
+    @PostMapping ("/createAccount")
+    public ResponseEntity<ClientResponseDTO> createClient(@RequestBody ClientRequestDTO data) {
         Client client = clientService.createClient(data);
-        return ResponseEntity.ok(client);
+
+        ClientResponseDTO res = new ClientResponseDTO(
+                client.getId(),
+                client.getName(),
+                client.getEmail(),
+                client.getPhoneNumber()
+                );
+
+        return ResponseEntity.ok(res);
     }
 
-    //@PostMapping
-    //public ResponseEntity<String> login(@RequestBody ClientResponseDTO data) {
+    @PostMapping ("/login")
+    public ResponseEntity<ClientResponseDTO> login(@RequestBody ClientRequestDTO data) {
+        Client client = clientService.login(data);
 
-    //}
+        return ResponseEntity.ok(client);
+    }
 }
