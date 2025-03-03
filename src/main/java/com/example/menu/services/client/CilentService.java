@@ -4,7 +4,6 @@ import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,10 +33,6 @@ public class ClientService implements IClientService {
     public Client login(ClientRequestDTO data) {
         Client client = clientRepository.findByEmail(data.email());
 
-        if (client != null && client.getPassword().equals(data.password())) {
-            return client;
-        }
-        return null;
     }
 
     @Override
@@ -51,6 +46,7 @@ public class ClientService implements IClientService {
         client.setName(data.name());
         client.setEmail(data.email());
         client.setPhoneNumber(data.phoneNumber());
+        
     }
 
     @Override

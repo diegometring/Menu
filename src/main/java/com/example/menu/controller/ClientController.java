@@ -1,9 +1,9 @@
 package com.example.menu.controller;
 
 import com.example.menu.dto.client.ClientResponseDTO;
-import com.example.menu.dto.client.ClientTokenDTO;
 import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.entity.Client;
+import com.example.menu.services.client.CilentService;
 import com.example.menu.services.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +30,9 @@ public class ClientController {
         return ResponseEntity.ok(res);
     }
 
-    @PostMapping ("/login")
+    /*@PostMapping ("/login")
     public ResponseEntity<ClientResponseDTO> login(@RequestBody ClientRequestDTO data) {
         Client client = clientService.login(data);
-
-        return ResponseEntity.ok(client);
-    }
+        
+    }*/
 }
