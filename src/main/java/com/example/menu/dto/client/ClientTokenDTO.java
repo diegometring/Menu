@@ -1,5 +1,5 @@
 package com.example.menu.dto.client;
 
-public record ClientTokenDTO(Long id, String email, String token) {
+public record ClientTokenDTO(String email, String password) {
 
 }
