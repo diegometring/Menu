@@ -9,6 +9,6 @@ public interface IClientService {
     Client createClient(ClientRequestDTO data);
     Client login(ClientRequestDTO data);
     List<Client> getAllClient();
-    void updateClient(Long id, ClientRequestDTO data);
+    Client updateClient(Long id, ClientRequestDTO data);
     void deleteClient(Long id);
 }

@@ -1,12 +1,19 @@
 package com.example.menu.services.client;
 
 import com.example.menu.dto.client.ClientRequestDTO;
+import com.example.menu.dto.client.ClientTokenDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.management.remote.JMXAuthenticator;
 import java.util.List;
 
 @Service
@@ -14,6 +21,8 @@ public class ClientService implements IClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    private AuthenticationManager authenticationManager;
 
     @Override
     public Client createClient(ClientRequestDTO data) {
@@ -31,10 +40,11 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Client login(ClientRequestDTO data) {
-        if (this.clientRepository.findByEmail(data.email()) != null) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<String> login(@RequestBody @Valid ClientTokenDTO data) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+        var auth = this.authenticationManager.authenticate(usernamePassword);
+
+        return ResponseEntity.ok().build();
     }
 
     @Override
@@ -43,12 +53,12 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void updateClient(Long id, ClientRequestDTO data) {
+    public Client updateClient(Long id, ClientRequestDTO data) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         client.setName(data.name());
         client.setEmail(data.email());
         client.setPhoneNumber(data.phoneNumber());
-
+        return client;
     }
 
     @Override

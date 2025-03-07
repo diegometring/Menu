@@ -7,10 +7,13 @@ import com.example.menu.entity.Client;
 import com.example.menu.services.client.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/client")
@@ -24,10 +27,7 @@ public class ClientController {
 
     @PostMapping ("/createAccount")
     public ResponseEntity<ClientResponseDTO> createClient(@RequestBody @Valid ClientRequestDTO data) {
-        if(this.clientService.)
-
         Client client = clientService.createClient(data);
-
         ClientResponseDTO res = new ClientResponseDTO(
                 client.getId(),
                 client.getName(),
@@ -39,10 +39,35 @@ public class ClientController {
     }
 
     @PostMapping ("/login")
-    public ResponseEntity login(@RequestBody @Valid ClientTokenDTO data) {
+    public ResponseEntity<String> login(@RequestBody @Valid ClientTokenDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping ("/getAll")
+    public List<Client> getAll() {
+        return clientService.getAllClient();
+    }
+
+    @PutMapping ("/update/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody ClientRequestDTO data) {
+        try {
+            Client updatedClient = clientService.updateClient(id, data);
+            return ResponseEntity.ok(updatedClient);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping ("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        try {
+            clientService.deleteClient(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
