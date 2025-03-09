@@ -30,7 +30,7 @@ public class ClientController {
         Client client = clientService.createClient(data);
         ClientResponseDTO res = new ClientResponseDTO(
                 client.getId(),
-                client.getName(),
+                client.getName(data.name()),
                 client.getEmail(),
                 client.getPhoneNumber()
                 );
@@ -38,12 +38,11 @@ public class ClientController {
         return ResponseEntity.ok(res);
     }
 
-    @PostMapping ("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid ClientTokenDTO data) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
+    @PostMapping("/login")
+    public ResponseEntity<Client> login(@RequestBody @Valid ClientTokenDTO data) {
+        Client client = clientService.login(data);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @GetMapping ("/getAll")

@@ -1,5 +1,6 @@
 package com.example.menu.entity;
 
+import com.example.menu.enums.StatusReservation;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

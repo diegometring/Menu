@@ -6,14 +6,11 @@ import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.management.remote.JMXAuthenticator;
 import java.util.List;
 
 @Service
@@ -40,11 +37,16 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public ResponseEntity<String> login(@RequestBody @Valid ClientTokenDTO data) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
+    public Client login(@RequestBody @Valid ClientTokenDTO data) {
+        try {
+            var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+            var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+            return clientRepository.findByEmail(data.email());
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     @Override
