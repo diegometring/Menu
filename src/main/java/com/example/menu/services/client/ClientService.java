@@ -46,7 +46,6 @@ public class ClientService implements IClientService {
         } catch (Exception e) {
             return null;
         }
-
     }
 
     @Override

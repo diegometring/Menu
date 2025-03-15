@@ -7,5 +7,5 @@ public interface IMenuService {
     Menu createMenu(MenuRequestDTO data);
     void deleteMenu(Long id);
     void updateMenu(Long id, MenuRequestDTO data);
-
+    Menu addOrder(Long id, MenuRequestDTO data);
 }

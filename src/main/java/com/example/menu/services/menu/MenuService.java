@@ -39,4 +39,9 @@ public class MenuService implements IMenuService{
         menu.setCategory(data.category());
         menu.setAvailable(data.available());
     }
+
+    @Override
+    public Menu addOrder(Long id, MenuRequestDTO data) {
+        return null;
+    }
 }
