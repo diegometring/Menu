@@ -19,6 +19,7 @@ public class ClientService implements IClientService {
     @Autowired
     private ClientRepository clientRepository;
 
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Override
@@ -37,7 +38,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Client login(@RequestBody @Valid ClientTokenDTO data) {
+    public Client login(ClientTokenDTO data) {
         try {
             var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
             var auth = this.authenticationManager.authenticate(usernamePassword);
