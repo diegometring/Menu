@@ -1,4 +1,7 @@
 package com.example.menu.enums;
 
-public class StatusReservation {
+public enum StatusReservation {
+    PENDING,
+    CONFIRMED,
+    CANCELLED
 }

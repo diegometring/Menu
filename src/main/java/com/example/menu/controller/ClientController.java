@@ -38,10 +38,20 @@ public class ClientController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Client> login(@RequestBody @Valid ClientTokenDTO data) {
+    public ResponseEntity<ClientResponseDTO> login(@RequestBody @Valid ClientTokenDTO data) {
         Client client = clientService.login(data);
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        if (client != null) {
+            ClientResponseDTO res = new ClientResponseDTO(
+                    client.getId(),
+                    client.getName(),
+                    client.getEmail(),
+                    client.getPhoneNumber()
+            );
+            return ResponseEntity.ok(res);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     @GetMapping ("/getAll")

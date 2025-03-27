@@ -38,6 +38,7 @@ public class MenuService implements IMenuService{
         menu.setPrice(data.price());
         menu.setCategory(data.category());
         menu.setAvailable(data.available());
+        menuRepository.save(menu);
     }
 
     @Override
