@@ -2,9 +2,7 @@ package com.example.menu.enums;
 
 public enum UserRole{
     ADMIN("admin"),
-
     USER("user"),
-
     EMPLOYEE("employee");
 
     private String role;
