@@ -60,12 +60,18 @@ public class ClientController {
     }
 
     @PutMapping ("/update/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody ClientRequestDTO data) {
+    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody ClientRequestDTO data) {
         try {
-            Client updatedClient = clientService.updateClient(id, data);
-            return ResponseEntity.ok(updatedClient);
+            Client client = clientService.updateClient(id, data);
+            ClientResponseDTO res = new ClientResponseDTO(
+                    client.getId(),
+                    client.getName(),
+                    client.getEmail(),
+                    client.getPhoneNumber()
+            );
+            return ResponseEntity.ok(res);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client not found");
         }
     }
 
@@ -75,7 +81,7 @@ public class ClientController {
             clientService.deleteClient(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }
