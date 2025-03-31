@@ -67,4 +67,9 @@ public class ClientService implements IClientService {
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public boolean emailExists(String email) {
+        return clientRepository.findByEmail();
+    }
 }

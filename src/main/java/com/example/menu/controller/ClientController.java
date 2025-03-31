@@ -26,22 +26,23 @@ public class ClientController {
 
     @PostMapping ("/createAccount")
     public ResponseEntity<ClientResponseDTO> createClient(@RequestBody @Valid ClientRequestDTO data) {
+        if(clientService.emailExists(data.email())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
         Client client = clientService.createClient(data);
         ClientResponseDTO res = new ClientResponseDTO(
                 client.getId(),
                 client.getName(),
                 client.getEmail(),
                 client.getPhoneNumber()
-                );
-
-        return ResponseEntity.ok(res);
+        );
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
     @PostMapping("/login")
     public ResponseEntity<ClientResponseDTO> login(@RequestBody @Valid ClientTokenDTO data) {
-        Client client = clientService.login(data);
-
-        if (client != null) {
+        try {
+            Client client = clientService.login(data);
             ClientResponseDTO res = new ClientResponseDTO(
                     client.getId(),
                     client.getName(),
@@ -49,8 +50,8 @@ public class ClientController {
                     client.getPhoneNumber()
             );
             return ResponseEntity.ok(res);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
     }
 
