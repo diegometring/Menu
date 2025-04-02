@@ -26,17 +26,21 @@ public class ClientController {
 
     @PostMapping ("/createAccount")
     public ResponseEntity<ClientResponseDTO> createClient(@RequestBody @Valid ClientRequestDTO data) {
-        if(clientService.emailExists(data.email())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        try {
+            Client client = clientService.createClient(data);
+            ClientResponseDTO res = new ClientResponseDTO(
+                    client.getId(),
+                    client.getName(),
+                    client.getEmail(),
+                    client.getPhoneNumber()
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        } catch (Exception e) {
+            throw new RuntimeException("");
         }
-        Client client = clientService.createClient(data);
-        ClientResponseDTO res = new ClientResponseDTO(
-                client.getId(),
-                client.getName(),
-                client.getEmail(),
-                client.getPhoneNumber()
-        );
-        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+
+
+
     }
 
     @PostMapping("/login")
@@ -51,7 +55,7 @@ public class ClientController {
             );
             return ResponseEntity.ok(res);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+            throw new RuntimeException("Credentials invalidates");
         }
     }
 
@@ -72,7 +76,7 @@ public class ClientController {
             );
             return ResponseEntity.ok(res);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client not found");
+            throw new RuntimeException("Client not found");
         }
     }
 

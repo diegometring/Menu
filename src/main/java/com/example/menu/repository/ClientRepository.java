@@ -7,6 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClientRepository extends JpaRepository <Client, Long> {
-    void deleteById(@NotNull Long id);
+    void deleteById(Long id);
     Client findByEmail(@NotBlank @Email String email);
 }
