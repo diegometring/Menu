@@ -51,6 +51,7 @@ public class ClientService implements IClientService {
 
     @Override
     public List<Client> getAllClient() {
+        //criar try/catch para garantir que o findAll será recebido
         return clientRepository.findAll();
     }
 
@@ -66,10 +67,5 @@ public class ClientService implements IClientService {
     @Override
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
-    }
-
-    @Override
-    public boolean emailExists(String email) {
-        return clientRepository.findByEmail();
     }
 }

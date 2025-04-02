@@ -38,9 +38,6 @@ public class ClientController {
         } catch (Exception e) {
             throw new RuntimeException("");
         }
-
-
-
     }
 
     @PostMapping("/login")
