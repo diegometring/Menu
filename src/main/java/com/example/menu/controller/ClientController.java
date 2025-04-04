@@ -36,7 +36,7 @@ public class ClientController {
             );
             return ResponseEntity.status(HttpStatus.CREATED).body(res);
         } catch (Exception e) {
-            throw new RuntimeException("");
+            throw new RuntimeException("Não foi possível criar o usuário");
         }
     }
 
