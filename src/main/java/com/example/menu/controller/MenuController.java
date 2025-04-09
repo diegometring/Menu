@@ -26,7 +26,6 @@ public class MenuController {
                     menu.getId(),
                     menu.getName(),
                     menu.getPrice()
-
             );
             return ResponseEntity.status(HttpStatus.CREATED).body(res);
         } catch (RuntimeException e) {
