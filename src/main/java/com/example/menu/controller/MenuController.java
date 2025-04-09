@@ -20,7 +20,7 @@ public class MenuController {
 
     @PostMapping
     public ResponseEntity<MenuResponseDTO> createMenu(MenuRequestDTO data) {
-        try{
+        try {
             Menu menu = menuService.createMenu(data);
             MenuResponseDTO res = new MenuResponseDTO(
                     menu.getId(),
@@ -32,6 +32,5 @@ public class MenuController {
         } catch (RuntimeException e) {
             throw new RuntimeException("Não foi possível criar receita");
         }
-
     }
 }
