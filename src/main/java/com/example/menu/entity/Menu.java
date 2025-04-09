@@ -2,11 +2,10 @@ package com.example.menu.entity;
 
 import com.example.menu.enums.Category;
 import jakarta.persistence.*;
-import lombok.*;
+
 
 import java.util.List;
 
-@Data
 @Entity
 /*@Getter
 @Setter
