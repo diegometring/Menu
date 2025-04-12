@@ -63,7 +63,7 @@ public class ClientService implements IClientService {
 
     @Override
     public Client updateClient(Long id, ClientRequestDTO data) {
-        Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
         client.setName(data.name());
         client.setEmail(data.email());
         client.setPhoneNumber(data.phoneNumber());
