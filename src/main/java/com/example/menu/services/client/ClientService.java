@@ -4,13 +4,11 @@ import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.dto.client.ClientTokenDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class ClientService implements IClientService {
             var auth = this.authenticationManager.authenticate(usernamePassword);
 
             Client client = clientRepository.findByEmail(data.email());
-            if(client == null) {
+            if (client == null) {
                 throw new RuntimeException("Client not found");
             }
             return client;
@@ -63,15 +61,23 @@ public class ClientService implements IClientService {
 
     @Override
     public Client updateClient(Long id, ClientRequestDTO data) {
-        Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+        Client clientt = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+
+        Client client = clientRepository.findByEmail(data.email());
+        if (client != null && !client.getId().equals(id)) {
+            throw new RuntimeException("email is already in use");
+        }
         client.setName(data.name());
         client.setEmail(data.email());
         client.setPhoneNumber(data.phoneNumber());
-        return client;
+        return clientRepository.save(client);
     }
 
     @Override
     public void deleteClient(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new RuntimeException("Client not found");
+        }
         clientRepository.deleteById(id);
     }
 }

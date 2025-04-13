@@ -9,10 +9,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/client")
@@ -21,69 +21,46 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @PostMapping ("/createAccount")
+    @PostMapping("/createAccount")
     public ResponseEntity<ClientResponseDTO> createClient(@RequestBody @Valid ClientRequestDTO data) {
-        try {
-            Client client = clientService.createClient(data);
-            ClientResponseDTO res = new ClientResponseDTO(
-                    client.getId(),
-                    client.getName(),
-                    client.getEmail(),
-                    client.getPhoneNumber()
-            );
-            return ResponseEntity.status(HttpStatus.CREATED).body(res);
-        } catch (Exception e) {
-            throw new RuntimeException("Não foi possível criar o usuário");
-        }
+        Client client = clientService.createClient(data);
+        ClientResponseDTO res = new ClientResponseDTO(client);
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
     @PostMapping("/login")
     public ResponseEntity<ClientResponseDTO> login(@RequestBody @Valid ClientTokenDTO data) {
-        try {
-            Client client = clientService.login(data);
-            ClientResponseDTO res = new ClientResponseDTO(
-                    client.getId(),
-                    client.getName(),
-                    client.getEmail(),
-                    client.getPhoneNumber()
-            );
-            return ResponseEntity.ok(res);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Credentials invalidates");
-        }
+        Client client = clientService.login(data);
+        ClientResponseDTO res = new ClientResponseDTO(client);
+        return ResponseEntity.ok(res);
+
     }
 
-    @GetMapping ("/getAll")
-    public List<Client> getAll() {
-        return clientService.getAllClient();
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ClientResponseDTO>> getAll() {
+        List<Client> clients = clientService.getAllClient();
+        List<ClientResponseDTO> resList = clients.stream()
+                .map(ClientResponseDTO::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(resList);
     }
 
-    @PutMapping ("/update/{id}")
+    /*@GetMapping ("/get/{id}")
+    public ResponseEntity getById() {
+
+    }*/
+
+    @PutMapping("/update/{id}")
     public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody ClientRequestDTO data) {
-        try {
-            Client client = clientService.updateClient(id, data);
-            ClientResponseDTO res = new ClientResponseDTO(
-                    client.getId(),
-                    client.getName(),
-                    client.getEmail(),
-                    client.getPhoneNumber()
-            );
-            return ResponseEntity.ok(res);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Client not found");
-        }
+        Client client = clientService.updateClient(id, data);
+        ClientResponseDTO res = new ClientResponseDTO(client);
+        return ResponseEntity.ok(res);
     }
 
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        try {
             clientService.deleteClient(id);
             return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+
     }
 }

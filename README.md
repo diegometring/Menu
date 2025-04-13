@@ -1,7 +1,8 @@
-# Menu
+# 🍽️ Menu - Sistema de Gerenciamento de Restaurante
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?&style=for-the-badge&logo=java&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 
 ## Descrição
 
@@ -11,31 +12,18 @@ solução completa para a administração de um restaurante.
 
 ## Pré requisitos
 
-Java 21
+Java 17
 
-## Instruções para instalação
+## 🛠️ Instalação
 
-## Git Clone
+### 1. Clone o repositório
 
-Como clonar o projeto
 
 ```bash
 git clone https://github.com/diegometring/Menu.git
 ```
 
 ## Funcionalidades
-
-1. Controle de estoque de veneno
-2. Controle de estoque de ração
-3. Controle de estoque de sementes (agricultura)
-4. Quantidade e custo gasto em combustível para X máquina e/ou carro empresa
-5. Cadastro de modelo de X máquina e/ou carro empresa
-6. Armazenamento de fotos e descrição das imagens
-7. Quantidade de gasto em X máquina e/ou carro empresa
-8. Criar lista de tarefas
-9. Alterar lista de tarefas
-10. Excluir lista de tarefas
-11. Confirmar a conclusão da tarefa
 
 ### 1. **Gestão de Mesas**
 - Cadastro de mesas.
@@ -70,39 +58,9 @@ git clone https://github.com/diegometring/Menu.git
 ### 8. **Relatórios**
 - Relatórios de vendas, estoque e desempenho do restaurante.
 
-# 🍽️ Menu - Sistema de Gerenciamento de Restaurante
-
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?&style=for-the-badge&logo=java&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
-
-## 📝 Descrição
-
-O **Menu** é um sistema completo para gestão de restaurantes desenvolvido em **Java 21** com arquitetura **MVC**, oferecendo:
-
-✔ Controle integrado de mesas, cardápio e pedidos  
-✔ Gestão inteligente de estoque e fornecedores  
-✔ Relatórios financeiros em tempo real  
-✔ Sistema de feedback dos clientes  
-✔ Integração com delivery
-
-## 🚀 Tecnologias Principais
-
-| Camada         | Tecnologias                 |
-|----------------|-----------------------------|
-| **Backend**    | Java 17, Spring Boot 3, JPA |
-| **Banco**      | PostgreSQL 16               |
-| **Frontend**   | React Native                |
-| **Ferramentas**| Postman (Documentação API)  |
-
 ## ⚙️ Pré-requisitos
 
 - Java 17 
 - PostgreSQL 16
 
-## 🛠️ Instalação
 
-### 1. Clone o repositório
-```bash
-git clone https://github.com/diegometring/Menu.git

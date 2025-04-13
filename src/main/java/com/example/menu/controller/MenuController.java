@@ -29,7 +29,7 @@ public class MenuController {
             );
             return ResponseEntity.status(HttpStatus.CREATED).body(res);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Não foi possível criar receita");
+            throw new RuntimeException("Unable to create recipe");
         }
     }
 }
