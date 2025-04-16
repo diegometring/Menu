@@ -13,6 +13,7 @@ public interface IClientService {
     Client createClient(ClientRequestDTO data);
     Client login(ClientTokenDTO data);
     List<Client> getAllClient();
+    Client getById(Long id);
     Client updateClient(Long id, ClientRequestDTO data);
     void deleteClient(Long id);
 }

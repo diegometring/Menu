@@ -1,10 +1,12 @@
 package com.example.menu.services.client;
 
 import com.example.menu.dto.client.ClientRequestDTO;
+import com.example.menu.dto.client.ClientResponseDTO;
 import com.example.menu.dto.client.ClientTokenDTO;
 import com.example.menu.entity.Client;
 import com.example.menu.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -71,6 +73,11 @@ public class ClientService implements IClientService {
         client.setEmail(data.email());
         client.setPhoneNumber(data.phoneNumber());
         return clientRepository.save(client);
+    }
+
+    @Override
+    public Client getById(Long id) {
+        return clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
     }
 
     @Override
