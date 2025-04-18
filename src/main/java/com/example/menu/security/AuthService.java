@@ -10,6 +10,7 @@ public class AuthService implements UserDetailsService {
 
     @Autowired
     ClientRepository client;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return client.findByEmail(email);

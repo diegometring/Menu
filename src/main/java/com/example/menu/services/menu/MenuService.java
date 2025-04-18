@@ -5,7 +5,7 @@ import com.example.menu.entity.Menu;
 import com.example.menu.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MenuService implements IMenuService{
+/*public class MenuService implements IMenuService{
 
     @Autowired
     private MenuRepository menuRepository;
@@ -45,4 +45,4 @@ public class MenuService implements IMenuService{
     public Menu addOrder(Long id, MenuRequestDTO data) {
         return null;
     }
-}
+}*/

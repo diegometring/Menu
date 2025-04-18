@@ -13,10 +13,6 @@ import java.util.List;
 
 @Table(name = "client")
 @Entity
-/*@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor*/
 public class Client implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +20,7 @@ public class Client implements UserDetails {
     private Long id;
     private String name;
     private String password;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
     private LocalDateTime registrationDate;
     private UserRole role;
@@ -35,7 +31,7 @@ public class Client implements UserDetails {
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations;
 
-    public Client(Long id, String name, String password, int phoneNumber, String email, LocalDateTime registrationDate, UserRole role) {
+    public Client(Long id, String name, String password, String phoneNumber, String email, LocalDateTime registrationDate, UserRole role) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -69,11 +65,11 @@ public class Client implements UserDetails {
         this.password = password;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
