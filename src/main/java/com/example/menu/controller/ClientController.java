@@ -18,34 +18,34 @@ import java.util.stream.Collectors;
 @RequestMapping("/Client")
 public class ClientController {
 
-    @Autowired
+    @Autowired // decorator para injeção de dependencia
     ClientService clientService;
 
-    @PostMapping("/createAccount")
+    @PostMapping("/createAccount") //
     public ResponseEntity<ClientResponseDTO> createClient(@RequestBody @Valid ClientRequestDTO data) {
         Client client = clientService.createClient(data);
         ClientResponseDTO res = new ClientResponseDTO(client);
-        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.status(HttpStatus.CREATED).body(res); //retorno o body com os valores recebidos
     }
 
     @PostMapping("/login")
     public ResponseEntity<ClientResponseDTO> login(@RequestBody @Valid ClientTokenDTO data) {
-        Client client = clientService.login(data);
-        ClientResponseDTO res = new ClientResponseDTO(client);
-        return ResponseEntity.ok(res);
+        Client client = clientService.login(data); // chamo o clientService
+        ClientResponseDTO res = new ClientResponseDTO(client); // atualizo os valores recebidos pelo clientTokenDTO
+        return ResponseEntity.ok(res); //retorno um status ok e o body
     }
 
     @GetMapping("/getAll")
     public ResponseEntity<List<ClientResponseDTO>> getAll() {
-        List<Client> clients = clientService.getAllClient();
+        List<Client> clients = clientService.getAllClient(); //chamo a service para receber todos os clients em uma lista
         List<ClientResponseDTO> resList = clients.stream()
                 .map(ClientResponseDTO::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(resList);
     }
 
-    @GetMapping ("/get/{id}")
-    public ResponseEntity<ClientResponseDTO> getById(Long id) {
+    @GetMapping ("/getById/{id}")
+    public ResponseEntity<ClientResponseDTO> getById(@PathVariable Long id) {
         Client client = clientService.getById(id);
         ClientResponseDTO res = new ClientResponseDTO(client);
         return ResponseEntity.ok(res);
