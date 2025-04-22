@@ -25,6 +25,10 @@ public class Stock {
         this.orderedStocks = orderedStocks;
     }
 
+    public Stock() {
+
+    }
+
     public Long getId() {
         return id;
     }

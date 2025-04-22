@@ -20,6 +20,7 @@ public class MenuController {
     @Autowired //decorator para injeção de dependencia
     private MenuService menuService;
 
+    @PostMapping("/createRecipe")
     public ResponseEntity<MenuResponseDTO> createMenu(@RequestBody @Valid MenuRequestDTO data) { //@Requestbody converte os dados json para o MenuRequestDTO e o @Valid aplica as validações feitas no dto
         Menu menu = menuService.createMenu(data); //chama a service
         MenuResponseDTO res = new MenuResponseDTO(menu);//cria um dto para resposta
@@ -43,8 +44,8 @@ public class MenuController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<MenuResponseDTO> update(@PathVariable String name, @RequestBody @Valid MenuRequestDTO data) { //pathvariable serve para extrair o valor e faz com que não seja mais necessário o uso de {} na url
-        Menu menu = menuService.updateMenu(name, data); //chama a service
+    public ResponseEntity<MenuResponseDTO> update(@PathVariable Long id, @RequestBody @Valid MenuRequestDTO data) { //pathvariable serve para extrair o valor e faz com que não seja mais necessário o uso de {} na url
+        Menu menu = menuService.updateMenu(id, data); //chama a service
         MenuResponseDTO res = new MenuResponseDTO(menu); //cria um dto para resposta
         return ResponseEntity.ok(res); //retorna um status 200 com o corpo recebido pelo dto
     }

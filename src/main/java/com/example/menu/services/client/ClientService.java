@@ -1,12 +1,12 @@
 package com.example.menu.services.client;
 
 import com.example.menu.dto.client.ClientRequestDTO;
-import com.example.menu.dto.client.ClientResponseDTO;
 import com.example.menu.dto.client.ClientTokenDTO;
+import com.example.menu.dto.menu.MenuRequestDTO;
 import com.example.menu.entity.Client;
+import com.example.menu.entity.Menu;
 import com.example.menu.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,15 +28,14 @@ public class ClientService implements IClientService {
 
     @Override
     public Client createClient(ClientRequestDTO data) {
-        if (clientRepository.findByEmail(data.email()) != null) {
+        if (clientRepository.findByEmail(data.email()) != null) {//faz a busca pelo email antes de criar o user
             throw new RuntimeException("email already in use");
         }
-
         Client cli = new Client();
         cli.setName(data.name());
         cli.setPhoneNumber(data.phoneNumber());
         cli.setEmail(data.email());
-        cli.setPassword(passwordEncoder.encode(data.password()));
+        cli.setPassword(passwordEncoder.encode(data.password())); //codifica a senha
         return clientRepository.save(cli);
     }
 
@@ -63,12 +62,8 @@ public class ClientService implements IClientService {
 
     @Override
     public Client updateClient(Long id, ClientRequestDTO data) {
-        Client clientt = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+        Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
 
-        Client client = clientRepository.findByEmail(data.email());
-        if (client != null && !client.getId().equals(id)) {
-            throw new RuntimeException("email is already in use");
-        }
         client.setName(data.name());
         client.setEmail(data.email());
         client.setPhoneNumber(data.phoneNumber());

@@ -1,4 +1,12 @@
 package com.example.menu.dto.stock;
 
-public record StockRequestDTO(String name, int quantity, double unitPrice) {
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record StockRequestDTO(
+        @NotBlank String nameProduct,
+        @Min(0) int quantity,
+        @NotNull double unitPrice
+) {
 }

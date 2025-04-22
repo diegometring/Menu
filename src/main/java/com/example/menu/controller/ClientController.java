@@ -3,7 +3,10 @@ package com.example.menu.controller;
 import com.example.menu.dto.client.ClientResponseDTO;
 import com.example.menu.dto.client.ClientRequestDTO;
 import com.example.menu.dto.client.ClientTokenDTO;
+import com.example.menu.dto.menu.MenuRequestDTO;
+import com.example.menu.dto.menu.MenuResponseDTO;
 import com.example.menu.entity.Client;
+import com.example.menu.entity.Menu;
 import com.example.menu.services.client.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +54,25 @@ public class ClientController {
         return ResponseEntity.ok(res);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody ClientRequestDTO data) {
+    /*@PutMapping("/update/{id}")
+    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody @Valid ClientRequestDTO data) {
         Client client = clientService.updateClient(id, data);
         ClientResponseDTO res = new ClientResponseDTO(client);
         return ResponseEntity.ok(res);
+    }*/
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody @Valid ClientRequestDTO data) {
+        try {
+            Client updatedClient = clientService.updateClient(id, data);
+            return ResponseEntity.ok(updatedClient);
+        } catch (RuntimeException e) {
+            // Captura a exceção "Client not found" do ClientService
+            throw new RuntimeException("Client not found");
+        } catch (Exception e) {
+            // Captura outras exceções inesperadas
+            throw new RuntimeException("aqui eu não sei");
+        }
     }
 
     @DeleteMapping("/delete/{id}")
