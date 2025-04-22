@@ -54,24 +54,15 @@ public class ClientController {
         return ResponseEntity.ok(res);
     }
 
-    /*@PutMapping("/update/{id}")
-    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody @Valid ClientRequestDTO data) {
-        Client client = clientService.updateClient(id, data);
-        ClientResponseDTO res = new ClientResponseDTO(client);
-        return ResponseEntity.ok(res);
-    }*/
-
     @PutMapping("/update/{id}")
     public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody @Valid ClientRequestDTO data) {
         try {
             Client updatedClient = clientService.updateClient(id, data);
             return ResponseEntity.ok(updatedClient);
         } catch (RuntimeException e) {
-            // Captura a exceção "Client not found" do ClientService
-            throw new RuntimeException("Client not found");
+            throw new RuntimeException("Client not found"); // Captura a exceção "Client not found" do ClientService
         } catch (Exception e) {
-            // Captura outras exceções inesperadas
-            throw new RuntimeException("aqui eu não sei");
+            throw new RuntimeException("Outras exceptions");
         }
     }
 

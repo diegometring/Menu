@@ -1,3 +1,72 @@
+## Pré requisitos
+
+Java 17
+Postgres 16
+
+## 🛠️ Instalação
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/diegometring/Menu.git
+```
+
+### 2. Crie um database no postgres com o nome Menu e adicione o código abaixo no application.properties
+
+```
+spring.application.name=menu
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/menu
+spring.datasource.username=postgres
+spring.datasource.password=123
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.driver-class-name=org.postgresql.Driver
+```
+
+### 3. Lista de arquivos que estão sendo usados para o trabalho
+
+```
+controller/ClientController
+dto/client/ClientRequestDTO
+dto/client/ClientResponseDTO
+entity/Client
+repository/ClientRepository
+services/client/ClientService
+services/client/IClientService
+
+controller/MenuController
+dto/menu/MenuRequestDTO
+dto/menu/MenuResponseDTO
+entity/Menu
+repository/MenuRepository
+services/menu/MenuService
+services/menu/IMenuService
+
+controller/StockController
+dto/stock/StockRequestDTO
+dto/stock/StockResponseDTO
+entity/Stock
+repository/StockRepository
+services/stock/StockService
+services/stock/IStockService
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 🍽️ Menu - Sistema de Gerenciamento de Restaurante
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?&style=for-the-badge&logo=java&logoColor=white)
@@ -10,18 +79,7 @@ Este é um sistema de gerenciamento de restaurantes desenvolvido em **Java** uti
 permite gerenciar mesas, cardápio, pedidos, reservas, estoque, pagamentos e feedback dos clientes, proporcionando uma
 solução completa para a administração de um restaurante.
 
-## Pré requisitos
 
-Java 17
-
-## 🛠️ Instalação
-
-### 1. Clone o repositório
-
-
-```bash
-git clone https://github.com/diegometring/Menu.git
-```
 
 ## Funcionalidades
 
@@ -60,7 +118,7 @@ git clone https://github.com/diegometring/Menu.git
 
 ## ⚙️ Pré-requisitos
 
-- Java 17 
+- Java 21
 - PostgreSQL 16
 
 
