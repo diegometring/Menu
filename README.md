@@ -23,7 +23,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
-### 3. Lista de arquivos que estão sendo usados para o trabalho
+### 3.. Lista de arquivos que estão sendo usados para o trabalho
 
 ```
 controller/ClientController
