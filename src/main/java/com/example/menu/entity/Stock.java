@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Table(name = "stock")//defino o nome da tabela
+@Entity //defino que esta classe será uma entidade
 public class Stock {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//defino id como valor que irá se gerar automaticamente
     private Long id;
     private String nameProduct;
     private int quantity;
@@ -17,6 +18,7 @@ public class Stock {
     @OneToMany(mappedBy = "stock")
     private List<OrderedStock> orderedStocks;
 
+    //construtor com argumentos
     public Stock(Long id, String nameProduct, int quantity, double unitPrice, List<OrderedStock> orderedStocks) {
         this.id = id;
         this.nameProduct = nameProduct;
@@ -25,10 +27,11 @@ public class Stock {
         this.orderedStocks = orderedStocks;
     }
 
-    public Stock() {
+    public Stock() { //construtor sem argumentos
 
     }
 
+    //daqui até o final são os getters e setters
     public Long getId() {
         return id;
     }

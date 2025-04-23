@@ -45,7 +45,7 @@ public class MenuService implements IMenuService {
 
     @Override
     public Menu getById(Long id) {
-        return menuRepository.findById(id).orElseThrow(() -> new RuntimeException("Menu not found"));//retorna a entidade salva no banco
+        return menuRepository.findById(id).orElseThrow(() -> new RuntimeException("Menu not found"));//retorna a entidade salva no banco, se não for encontrado recebe uma mensagem de erro
     }
 
     @Override

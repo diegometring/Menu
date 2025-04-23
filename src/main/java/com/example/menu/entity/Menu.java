@@ -6,14 +6,11 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
-/*@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor*/
+@Table(name ="menu")//defino o nome da tabela
+@Entity //defino que esta classe será uma entidade
 public class Menu {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//defino id como valor que irá se gerar automaticamente
 
     private Long id;
     private String name;
@@ -28,6 +25,7 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<Ordered> ordereds;
 
+    //construtor com argumentos
     public Menu(Long id, String name, String image, String description, int price, boolean available, Category category) {
         this.id = id;
         this.name = name;
@@ -38,10 +36,11 @@ public class Menu {
         this.category = category;
     }
 
-    public Menu() {
+    public Menu() { //construtor sem argumentos
 
     }
 
+    //daqui até o final são os getters e setters
     public Long getId() {
         return id;
     }

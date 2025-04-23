@@ -33,7 +33,7 @@ public class MenuController {
         List<MenuResponseDTO> resList = menu.stream()//uso stream para transformar menu em uma lista de dto
                 .map(MenuResponseDTO::new) // a cada entidade será criado um dto separado
                 .collect(Collectors.toList()); //coleta os dto's para uma nova lista
-        return ResponseEntity.ok(resList); //retorna status 200
+        return ResponseEntity.ok(resList); //retorna status 200 e com o body do resList
     }
 
     @GetMapping ("/getById/{id}")

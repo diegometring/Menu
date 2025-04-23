@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "client")
-@Entity
+@Table(name = "client") //defino o nome da tabela
+@Entity //defino que esta classe será uma entidade
 public class Client implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //defino id como valor que irá se gerar automaticamente
 
     private Long id;
     private String name;
@@ -25,12 +25,13 @@ public class Client implements UserDetails {
     private LocalDateTime registrationDate;
     private UserRole role;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client") //mapeamento com a tabela ordereds
     private List<Ordered> ordereds;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client") //mapeamento com a tabela reservation
     private List<Reservation> reservations;
 
+    //construtor com argumentos
     public Client(Long id, String name, String password, String phoneNumber, String email, LocalDateTime registrationDate, UserRole role) {
         this.id = id;
         this.name = name;
@@ -41,10 +42,11 @@ public class Client implements UserDetails {
         this.role = role;
     }
 
-    public Client() {
+    public Client() { //construtor sem argumentos para poder criar um objeto nas controllers
 
     }
 
+    //daqui até o próximo comentário são os getters e setters
     public Long getId() {
         return id;
     }
@@ -97,6 +99,7 @@ public class Client implements UserDetails {
         this.role = role;
     }
 
+    //daqui para baixo não foi utilizado para o trabalho, mas se trata das permissões de login
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.ADMIN)
